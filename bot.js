@@ -1,10 +1,13 @@
-const { Telegraf } = require('telegraf');
-require('dotenv').config();  // Ensure you install dotenv: npm install dotenv
-
-const TOKEN = process.env.BOT_TOKEN;  // Set your token in a .env file and add .env to your .gitignore
+const { Telegraf } = require("telegraf");
+const express = require('express');
+const app = express();
+const TOKEN = "6286384554:AAE19TZVDoJ4kc9gjRhYCAYtkhrclusaHfE";
 const bot = new Telegraf(TOKEN);
 
 const web_link = "https://2048-red.vercel.app/";
+// const URL = process.env.URL;
+const URL="https://2048-red.vercel.app/" 
+const PORT = process.env.PORT || 3000;
 
 bot.start((ctx) =>
   ctx.reply("Welcome..!!!!!!!!", {
@@ -14,14 +17,20 @@ bot.start((ctx) =>
   })
 );
 
-module.exports = (req, res) => {
-  if (req.method === 'POST') {
-    bot.handleUpdate(req.body, res);
-  } else {
-    res.status(200).send('Hello world! This is your bot server.');
-  }
-};
+// Set the bot API endpoint
+bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
 
+app.use(bot.webhookCallback(`/bot${TOKEN}`));
+
+app.get('/', (req, res) => {
+  res.send('Hello World! The bot is running.');
+});
+
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// bot.launch();
 
 
 // const express = require('express');
