@@ -1,13 +1,8 @@
 const { Telegraf } = require("telegraf");
-const express = require('express');
-const app = express();
 const TOKEN = "6286384554:AAE19TZVDoJ4kc9gjRhYCAYtkhrclusaHfE";
 const bot = new Telegraf(TOKEN);
 
 const web_link = "https://2048-red.vercel.app/";
-// const URL = process.env.URL;
-const URL="https://2048-red.vercel.app/" 
-const PORT = process.env.PORT || 3000;
 
 bot.start((ctx) =>
   ctx.reply("Welcome..!!!!!!!!", {
@@ -17,20 +12,7 @@ bot.start((ctx) =>
   })
 );
 
-// Set the bot API endpoint
-bot.telegram.setWebhook(`${URL}/bot${TOKEN}`);
-
-app.use(bot.webhookCallback(`/bot${TOKEN}`));
-
-app.get('/', (req, res) => {
-  res.send('Hello World! The bot is running.');
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-
-// bot.launch();
+bot.launch();
 
 
 // const express = require('express');
