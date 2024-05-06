@@ -1,0 +1,25 @@
+{
+    "version": 2,
+    "env": {
+      "BOT_TOKEN": "@bot_token" 
+    },
+    "builds": [
+      {
+        "src": "index.js",
+        "use": "@vercel/node"
+      }
+    ],
+    "routes": [
+      {
+        "src": "/",
+        "methods": ["POST"],
+        "dest": "/index.js"
+      },
+      {
+        "src": "/",
+        "methods": ["GET"],
+        "dest": "/index.js"
+      }
+    ]
+  }
+  
